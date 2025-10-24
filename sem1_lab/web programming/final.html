@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+        <style>
+            body{
+                align-items: center;
+                justify-content: center;
+            }
+            #form{
+                border:2px solid black;
+                padding: 20px;
+                margin: auto;
+                width: 500px;
+            }
+            label{
+                display: inline-block;
+                text-align: left;
+                margin-top: 8px;
+            }
+            .error{
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="form" onsubmit="return validForm()">
+            <center>
+            <label for="fname">Enter name:</label>
+            <input type="text" id="fname"><br>
+            <span id="fnameError" class="error"></span><br>
+
+            <label for="email">Enter email:</label>
+            <input type="email" id="email"><br>
+            <span id="emailError" class="error"></span><br>
+
+            <label for="password">Enter password:</label>
+            <input type="text" id="password"><br>
+            <span id="passwordError" class="error"></span><br>
+
+            <label for="cpassword">Confirm password:</label>
+            <input type="text" id="cpassword"><br>
+            <span id="cpasswordError" class="error"></span><br>
+
+            <button type="submit" value="submit">Submit</button>
+                </center>
+        </form>
+        <script>
+            function validForm()
+            {
+                document.getElementById("fnameError").innerText="";
+                document.getElementById("emailError").innerText="";
+                document.getElementById("passwordError").innerText="";
+                
+                var fname=document.getElementById("fname").value.trim();
+                var email=document.getElementById("email").value.trim();
+                var password=document.getElementById("password").value.trim();
+                var cpassword=document.getElementById("cpassword").value.trim();
+                
+
+                var valid=true;
+
+                if(fname=="")
+                {
+                    document.getElementById("fnameError").innerText="Enter name";
+                    valid=false;
+                }
+
+                if(email=="" || !email.endsWith("@gmail.com"))
+                {
+                    document.getElementById("emailError").innerText="Email should contain -@gmail.com";
+                    valid=false;
+                }
+                if(password=="" || password.length<6)
+                {
+                    document.getElementById("passwordError").innerText="Password should 6 characters long";
+                    valid=false;
+                }
+
+                if(cpassword=="" || cpassword!=password)
+                {
+                    document.getElementById("cpasswordError").innerText="Password wont match";
+                    valid=false;
+                }
+
+                if(valid)
+                alert("Submitted sucesffully");
+            return valid;
+
+            }
+        </script>
+    </body>
+</html>

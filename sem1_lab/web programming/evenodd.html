@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>even odd</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <form class="container" onsubmit="return evenodd()">
+        <label>Input a Number:</label>
+        <input type="text" id="number">
+        <button type="submit">Submit</button><br>
+        <p id="result"></p>
+    </form>
+
+    <script>
+        function evenodd()
+        {
+            document.getElementById("result").innerText="";
+            var num=document.getElementById("number").value;
+            num=parseInt(num);
+            if(num==="" || isNaN(num))
+            {
+                document.getElementById("result").innerText="Please enter a number";
+                return false;
+            }
+            num=parseInt(num);
+
+            if(num%2==0)
+            {
+                document.getElementById("result").innerText="it is even";
+            }
+            else
+            {
+                document.getElementById("result").innerText="it is odd";
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
