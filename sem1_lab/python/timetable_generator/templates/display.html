@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Weekly Timetable</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
+
+<body>
+
+    <div class="container-wide">
+        <h1>Your Weekly Timetable</h1>
+
+        <table>
+            <tr>
+                <th>Day</th>
+                {% for i in range(hours_per_day) %}
+                <th>Hour {{ i+1 }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for day in working_days %}
+            <tr>
+                <td class="day">{{ day }}</td>
+                {% for subject in timetable[day] %}
+                <td>{{ subject }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/create-timetable" class="back-btn">Create Another Timetable</a>
+    </div>
+
+</body>
+</html>

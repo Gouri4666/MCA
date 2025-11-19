@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Timetable</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_timetable.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create Timetable</h1>
+
+    <form method="POST">
+
+        <label>Hours per day (e.g., 6):</label>
+        <input type="number" name="hours_per_day" required>
+
+        <label>Number of subjects:</label>
+        <input type="number" name="num_subjects" id="num_subjects" required>
+
+        <button type="button" id="add-subjects-btn">Add Subjects</button>
+
+        <div id="subjects-area"></div>
+
+        <button type="submit" class="submit-btn">Generate Timetable</button>
+    </form>
+
+    <a href="/" class="home-link">Home</a>
+</div>
+
+<script>
+    document.getElementById("add-subjects-btn").onclick = function () {
+        let num = document.getElementById("num_subjects").value;
+        let area = document.getElementById("subjects-area");
+        area.innerHTML = "";
+
+        for (let i = 0; i < num; i++) {
+            area.innerHTML += `
+                <div class="subject-row">
+                    <input type="text" name="subject_name[]" placeholder="Subject Name" required>
+                    <input type="number" name="subject_hours[]" placeholder="Min hours/week" required>
+                </div>
+            `;
+        }
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* Background */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    font-family: "Poppins", sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main container */
+.container {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.10);
+    padding: 40px 50px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* Labels */
+label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    margin: 15px 0 5px;
+}
+
+/* Inputs */
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+}
+
+/* Buttons */
+button, .submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    background: #ffbd59;
+    color: black;
+    transition: 0.3s;
+}
+
+button:hover, .submit-btn:hover {
+    background: #ffac33;
+}
+
+/* Add-subjects-btn separate styling */
+#add-subjects-btn {
+    background: #ffd369;
+}
+
+#add-subjects-btn:hover {
+    background: #ffca48;
+}
+
+/* Dynamic subject row */
+.subject-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Home link */
+.home-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ffe4b3;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
