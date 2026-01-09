@@ -1,0 +1,5 @@
+f=open("file1.txt","r")
+contents=f.read()
+contents=contents.replace("pizza","cake")
+f=open("file1.txt","w")
+f.write(contents)

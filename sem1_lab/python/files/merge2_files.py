@@ -1,0 +1,6 @@
+f1=open("file1.txt","r")
+content1=f1.read()
+f2=open("file2.txt","r")
+content2=f2.read()
+f3=open("file3.txt","w")
+f3.write(content1+"\n"+ content2)
