@@ -1,231 +1,46 @@
+//doublt ll
 #include<stdio.h>
 #include<stdlib.h>
-struct node
+struct node 
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct node *left;
+    struct node *right;
 };
-struct node *newnode,*ptr,*temp,*start=NULL,*tail;
-struct node* create()
-{
-    printf("Enter item to insert: ");
-    newnode=(struct node *)malloc(sizeof(struct node));
-    scanf("%d",&newnode->data);
-    newnode->prev=newnode->next=NULL;
-    return newnode;
-}
-void display()
-{
-    if(start==NULL)
-    printf("List is empty");
-    else
-    {
-        ptr=start;
-        printf("Display forward: ");
-        while(ptr!=NULL)
-        {
-            printf("%d ",ptr->data);
-            ptr=ptr->next;
-        }
-        printf("\nDisplay backward: ");
-        ptr=tail;
-        while(ptr!=NULL)
-        {
-            printf("%d ",ptr->data);
-            ptr=ptr->prev;
-        }
-    }
-}
-int count()
-{
-    int c=0;
-    if(start!=NULL)
-    {
-        ptr=start;
-        while(ptr!=NULL)
-        {
-            c++;
-            ptr=ptr->next;
-        }
-    }
-    return c;
-}
-void insert_beg()
-{
-    create();
-    if(start==NULL)//insert as first node
-    {
-        start=newnode;
-        tail=newnode;
-    }
-    else
-    {
-        newnode->next=start;
-        start->prev=newnode;
-        start=newnode;
-        printf("%d inserted at beginning",start->data);
-    }
-}
-void insert_end()
-{
-    create();
-    if(tail==NULL)
-    start=tail=newnode;
-    else
-    {
-        newnode->prev=tail;
-        tail->next=newnode;
-        tail=newnode;
-    }
-    printf("%d inserted at end",tail->data);
-}
-
-void insert_pos()
-{
-    int pos;
-    int c=count();
-    printf("Enter position to insert: ");
-    scanf("%d",&pos);
-    if(start!=NULL)
-    {
-    if(pos==c+1)
-    insert_end();
-    else if(pos==1)
-    insert_beg();
-    else if(pos>1 && pos<=c)
-        {
-            create();
-            ptr=start;
-            temp=start;
-            for(int i=1;i<=pos-1;i++)
-            {
-                temp=ptr;
-                ptr=ptr->next;
-            }
-            temp->next=newnode;
-            newnode->prev=temp;
-            newnode->next=ptr;
-            ptr->prev=newnode;
-            printf("%d inserted",newnode->data);
-        }
-        else
-        {
-            printf("Invalid position");
-        }
-    }
-    else
-    printf("Insertion not possible");
-}
-void delete_beg()
-{
-    if(start==NULL)
-    printf("List is empty");
-    else{
-        int item=start->data;
-        if(start==tail)
-        {
-            start->next=start->prev=NULL;
-            start=tail=NULL;
-        }
-        ptr=start;
-        start=start->next;
-        ptr->next=ptr->prev=NULL;
-        start->prev=NULL;
-        free(ptr);
-        printf("%d deleted at beginning",item);
-    }
-}
-void delete_end()
-{
-    if(tail==NULL)
-    {
-        printf("Deletion not possible");
-    }
-    else
-    {
-        ptr=tail;
-        int item=tail->data;
-        if(start==tail)
-        {
-            start->prev=start->next=NULL;
-            free(start);
-            start=tail=NULL;
-        }
-        else
-        {
-            ptr=tail;
-            tail=tail->prev;
-            tail->next=NULL;
-            ptr->prev=ptr->next=NULL;
-            free(ptr);
-        }
-        printf("%d deleted",item);
-        
-    }
-}
-void delete_pos()
-{
-    int pos,item;
-    struct node *ptr,*temp;
-    if(start==NULL)
-    printf("Deletion not possible");
-    else
-    {
-        printf("Enter position of node to delete: ");
-        scanf("%d",&pos);
-        int c=count();
-        if(pos==1)
-        delete_beg();
-        else if(pos==c)
-        delete_end();
-        else
-        {
-            if(pos>1 && pos<c)
-            {
-                ptr=start;
-                for(int i=1;i<=pos-1;i++)
-                {
-                    temp=ptr;
-                    ptr=ptr->next;
-                }
-                temp->next=ptr->next;
-                ptr->next->prev=temp;
-                free(ptr);
-                printf("node delted");
-            }
-            else
-            {
-                printf("Invalid position");
-                return;
-            }
-        }
-    }
-}
+struct node *start=NULL,*tail=NULL,*ptr=NULL,*prev=NULL,*temp=NULL,*newnode=NULL;
+void insert_beg();
+void insert_pos();
+void insert_end();
+void display();
+void delete_beg();
+void delete_pos();
+void delete_end();
+int count();
 int main()
 {
-    int val,n;
-    printf("Enter n: ");
+    int i,n,value;
+    printf("enter n:");
     scanf("%d",&n);
-    for(int i=0;i<n;i++)
+    printf("Enter %d elemenst: ",n);
+    for(i=1;i<=n;i++)
     {
-        printf("Enter element %d: ",i+1);
-        scanf("%d",&val);
+        scanf("%d",&value);
         newnode=(struct node *)malloc(sizeof(struct node));
-        newnode->data=val;
-        newnode->next=newnode->prev=NULL;
+        newnode->data=value;
+        newnode->left=NULL;
+        newnode->right=NULL;
         if(start==NULL)
         {
             start=newnode;
-            tail=newnode;
             ptr=newnode;
+            tail=newnode;
         }
         else
         {
+            ptr->right=newnode;
+            newnode->left=ptr;
+            ptr=ptr->right;
             tail=newnode;
-            newnode->prev=ptr;
-            ptr->next=newnode;
-            ptr=ptr->next;
         }
     }
     printf("List created");
@@ -264,5 +79,248 @@ int main()
         scanf("%d",&cont);
     }
     while(cont==1);
-    
+    return 0;
+}
+
+void insert_beg()
+{
+    int value;
+    printf("enter value to insert:");
+    scanf("%d",&value);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=value;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    if(start==NULL)//insert as start
+    {
+        start=newnode;
+        tail=newnode;
+    }
+    else
+    {
+        newnode->right=start;
+        start->left=newnode;
+        start=newnode;
+    }
+    printf("%d inserted at beginning",value);
+}
+void insert_pos()
+{
+    int pos, value, i;
+    int c = count();
+    struct node *newnode, *temp;
+
+    printf("Enter position to insert: ");
+    scanf("%d", &pos);
+
+    printf("Enter value to insert: ");
+    scanf("%d", &value);
+
+    if(pos < 1 || pos > c + 1)
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    /* Insert at beginning */
+    if(pos == 1)
+    {
+        insert_beg();
+        return;
+    }
+
+    /* Insert at end */
+    if(pos == c + 1)
+    {
+        insert_end();
+        return;
+    }
+
+    /* Insert at middle */
+    newnode = (struct node *)malloc(sizeof(struct node));
+    if(newnode == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return;
+    }
+
+    newnode->data = value;
+
+    temp = start;
+    for(i = 1; i < pos - 1; i++)
+    {
+        temp = temp->right;
+    }
+
+    newnode->right = temp->right;
+    newnode->left = temp;
+
+    temp->right->left = newnode;
+    temp->right = newnode;
+
+    printf("%d inserted at position %d\n", value, pos);
+}
+
+void insert_end()
+{
+    int value;
+    printf("enter value to insert:");
+    scanf("%d",&value);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=value;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    if(start==NULL)
+    {
+        start=newnode;
+        tail=newnode;
+    }
+    else
+    {
+        tail->right=newnode;
+        newnode->left=tail;
+        tail=newnode;
+    }
+    printf("%d inserted at end",value);
+
+}
+void display()
+{
+    if(start==NULL)
+    {
+        printf("empty");
+    }
+    else
+    {
+        ptr=start;
+        printf("Forward Traversal: ");
+        while(ptr!=NULL)
+        {
+            printf("%d ",ptr->data);
+            ptr=ptr->right;
+        }
+        ptr=tail;
+        printf("\nBackward Traversal: ");
+        while(ptr!=NULL)
+        {
+            printf("%d ",ptr->data);
+            ptr=ptr->left;
+        }
+    }
+}
+void delete_beg()
+{
+    int value;
+    if(start==NULL)
+    printf("Deletion not possible");
+    else
+    {
+        value=start->data;
+        if(start==tail)//one only element
+        {
+            start=NULL;
+            tail=NULL;
+        }
+        else
+        {
+            ptr=start;
+            start=start->right;
+            start->left=NULL;
+            ptr->right=NULL;
+            free(ptr);
+        }
+    }
+    printf("%d deleted from beginnng",value);
+}
+void delete_pos()
+{
+    int pos, value, i;
+    int c = count();
+    struct node *temp;
+
+    if(start == NULL)
+    {
+        printf("Deletion not possible\n");
+        return;
+    }
+
+    printf("Enter position to delete: ");
+    scanf("%d", &pos);
+
+    if(pos < 1 || pos > c)
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    /* delete first node */
+    if(pos == 1)
+    {
+        delete_beg();
+        return;
+    }
+
+    /* delete last node */
+    if(pos == c)
+    {
+        delete_end();
+        return;
+    }
+
+    /* delete middle node */
+    temp = start;
+    for(i = 1; i < pos; i++)
+    {
+        temp = temp->right;
+    }
+
+    value = temp->data;
+
+    temp->left->right = temp->right;
+    temp->right->left = temp->left;
+
+    free(temp);
+
+    printf("%d deleted from position %d\n", value, pos);
+}
+
+void delete_end()
+{
+    int value;
+    if(tail==NULL)
+    printf("Deletion not possible");
+    else
+    {
+        value=tail->data;
+        if(start==tail)//one only element
+        {
+            start=NULL;
+            tail=NULL;
+        }
+        else
+        {
+            ptr=tail;
+            tail=tail->left;
+            tail->right=NULL;
+            ptr->left=NULL;
+            free(ptr);
+
+        }
+        printf("%d deleted from end",value);
+
+    }
+}
+int count()
+{
+    int c=0;
+    if(start!=NULL)
+    {
+        ptr=start;
+        while(ptr!=NULL)
+        {
+            ptr=ptr->right;
+            c++;
+        }
+    }
+    return c;
 }

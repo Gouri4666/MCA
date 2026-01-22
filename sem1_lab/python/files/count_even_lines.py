@@ -1,4 +1,6 @@
-with open('file1.txt','r') as f1:
-    lines=f1.readlines()
-for i in range(0,len(lines),2):
-    print(lines[i])
+with open("demo.txt","r") as f:
+    contents=f.readlines()
+print(contents)
+print("Even position: ")
+for i in range(0,len(contents),2):
+    print(contents[i],end="")

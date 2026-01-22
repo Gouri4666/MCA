@@ -11,12 +11,11 @@ struct Node {
 struct Node* top = NULL;
 
 // Push function
-void push(int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    if (!newNode) {
-        printf("Memory allocation failed\n");
-        return;
-    }
+void push(int value) 
+{
+    struct Node* newNode;
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
     newNode->data = value;
     newNode->next = top; // new node points to current top
     top = newNode;       // update top
@@ -24,12 +23,15 @@ void push(int value) {
 }
 
 // Pop function
-void pop() {
-    if (top == NULL) {
+void pop() 
+{
+    struct Node* temp;
+    if (top == NULL) 
+    {
         printf("Stack is empty\n");
         return;
     }
-    struct Node* temp = top;
+    temp = top;
     int item = temp->data;
     top = top->next;   // move top to next node
     free(temp);        // free popped node

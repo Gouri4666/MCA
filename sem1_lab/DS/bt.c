@@ -62,17 +62,23 @@ void insertion()
 	scanf("%d",&newnode->data);
 	newnode->left = NULL;
     newnode->right = NULL;
+
+
 	if(root==NULL)
 	{
 		root=newnode;
 		printf("%d inserted as root node",root->data);
 		return;
 	}
+
+
 	printf("Enter parent value: ");
 	scanf("%d",&parent);
+
 	struct node *queue[100];
 	int front=0,rear=0;
 	queue[rear]=root;
+	
 	while(front<=rear)
 	{
 		temp=queue[front++];
@@ -145,7 +151,6 @@ void deleteN()
     {
         if (root == NULL)
             break;
-
         struct node *queue[100];
         int front = 0, rear = 0;
         queue[rear] = root;

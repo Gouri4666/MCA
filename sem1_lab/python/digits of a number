@@ -1,0 +1,10 @@
+num=int(input("Enter a number: "))
+l=[]
+if num>0:
+    print("digits of the number:", end=" ")
+    while num>0:
+        rem=num%10
+        l.append(rem)
+        num=num//10
+    for i in l[::-1]:
+        print(i,end=" ")

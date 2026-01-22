@@ -1,7 +1,7 @@
 #create listof names and cound names starts with a
-l=input("Enter names separated by comma: ").split(",")
-count=0
-for i in l:
-    if i.startswith("a"):
-        count+=1
-print("Number of names starting with 'a':", count)
+l=input("list: ").split(" ")
+c=0
+for items in l:
+    if items.startswith("a"):
+        c=c+1
+print("Count: ",c)

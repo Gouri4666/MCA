@@ -1,11 +1,8 @@
-f=open("file1.txt","r")
-lines=f.readlines()
-f.close()
+with open("demo.txt","r") as f1:
+    lines=f1.readlines()
 new=[]
-for item in lines:
-    if not item.startswith('#'):
-        new.append(item)
-f2=open("file1.txt","w")
-f2.writelines(new)
-f2.close()
-    
+for items in lines:
+    if not items.startswith('#'):
+        new.append(items)
+for items in new:
+    print(items,end="")

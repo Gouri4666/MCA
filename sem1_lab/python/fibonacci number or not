@@ -1,0 +1,13 @@
+num=int(input("Enter a number to check whether is a fibonacci: "))
+
+a=0
+b=1
+if num>0:
+    while b<num:
+        c=a+b
+        a=b
+        b=c
+    if b==num:
+        print(num,"is a Fibonacci number")
+    else:
+        print(num,"is not a Fibonacci number")

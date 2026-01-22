@@ -1,12 +1,12 @@
-//bst
 #include<stdio.h>
 #include<stdlib.h>
+
 struct node{
     int data;
     struct node *right;
     struct node *left;
 };
-struct node *root=NULL;
+
 void insertion();
 void deletion();
 void preorder();
@@ -16,10 +16,11 @@ void preorderTraversal(struct node *node);
 void inorderTraversal(struct node *node);
 void postorderTraversal(struct node *node);
 
+struct node *root;
+
 int main()
 {
-        int ch,cont;
-
+    int ch,cont;
     do
     {
     printf("1.insertion\n2.Deletion\n3.Preorder\n4.Inorder\n5.postorder\n");
@@ -47,97 +48,130 @@ int main()
 }
 void insertion()
 {
+    struct node *newnode=NULL,*parent=NULL,*current=NULL;
     int value;
-    struct node *current,*parent,*newnode;
+
     printf("Enter value to insert: ");
     scanf("%d",&value);
     newnode=(struct node *)malloc(sizeof(struct node));
     newnode->data=value;
     newnode->right=newnode->left=NULL;
+
     if(root==NULL)
-    {
+    {//insert as root node
         root=newnode;
-        printf("Value inserted as root node");
+        printf("%d inserted as root node",value);
         return;
     }
+
     parent=NULL;
     current=root;
     while(current!=NULL)
     {
         parent=current;
-        if(value<current->data)
-        current=current->left;
+
+        if(value<parent->data)
+        {
+            current=parent->left;
+        }
         else
-        current=current->right;
+        current=parent->right;
     }
-    if(value<parent->data)
+    //inserting
+
+    if(value<parent->data)//left of parent
+    {
     parent->left=newnode;
+    printf("%d inserted to the left of %d",value,parent->data);
+    }
+
     else
-    parent->right=newnode;
-    printf("Value inserted");
+    {
+    parent->right=newnode;//right of parent
+    printf("%d inserted to the right of %d",value,parent->data);
+    }
 }
 void deletion()
 {
-    int value;
-    struct node *current,*parent,*child;
-    printf("Enter value to delete:");
-    scanf("%d",&value);
+    struct node *current=NULL,*parent=NULL,*child=NULL;
     if(root==NULL)
     {
-        printf("Tree is empty");
+        printf("Deletion not possible");
         return;
     }
-   current=root;
-   parent=NULL;
-   while(current!=NULL && current->data!=value)
-   {
+
+    int value;
+    printf("Enter value to delete: ");
+    scanf("%d",&value);
+
+    parent=NULL;
+    current=root;
+    while(current!=NULL && current->data!=value)//***IMP***/
+    {
         parent=current;
-        if(value<current->data)
-        current=current->left;
+        if(value<parent->data)
+        current=parent->left;
         else
-        current=current->right;
-   }
-   if(current==NULL)
-   {
-    printf("Value not found");
-    return;
-   }
-   //case:1
-   if(current->left==NULL && current->right==NULL)
-   {
+        current=parent->right;
+    }
+
+
+    if(current==NULL)
+    {
+        printf("Value not found");
+        return;
+    }
+
+    //case 1:no child
+    if(current->left==NULL && current->right==NULL)
+    {
         if(current==root)
         {
             root=NULL;
+            printf("Node deleted");
+            return;
         }
-        else
+        if(parent->left==current)
         {
-        if(current==parent->left)
-        parent->left=NULL;
+            parent->left=NULL;
+        }
         else
         parent->right=NULL;
+        printf("Node deleted");
         free(current);
-        }
-   }
-   else if(current->left==NULL || current->right==NULL)
-   {
+    }
+
+
+    //case 2:1 child
+    else if(current->left==NULL || current->right==NULL)
+    {
         if(current->left!=NULL)
-        child=current->left;
+        child=current->left;//child in left
+
         else
-        child=current->right;
-        if(current==root)
+        child=current->right;//child in tight
+
+        if(current==root)//if root node to delete
         {
-            root=child;
+            root=child;//replace root with child
+            free(current);
         }
+
         else
         {
             if(parent->left==current)
             parent->left=child;
             else
             parent->right=child;
+            printf("node deleted");
+            free(current);
         }
-   }
-   else
-   {
+    }
+
+
+    //case 3 :both child
+    else
+    {
         struct node *s=current->right;
         struct node *sp=current;
         while(s->left!=NULL)
@@ -145,15 +179,18 @@ void deletion()
             sp=s;
             s=s->left;
         }
-        current->data=s->data;
-        if(sp->left==s)
-        sp->left=current->right;
-        else
-        sp->right=current->right;
-        free(s);
-   }
-   printf("node deleted");
 
+        //replace
+        current->data=s->data;
+        
+        //delete sucessor
+        if(sp->left==s)
+        sp->left=s->right;
+        else
+        sp->right=s->right;
+        printf("Node deleted");
+        free(s);
+    }
 }
 void preorder()
 {
@@ -162,7 +199,7 @@ void preorder()
         printf("Empty");
         return;
     }
-    printf("Preorder Traversal:");
+    printf("Preorder Traversal: ");
     preorderTraversal(root);
 }
 void inorder()
@@ -172,7 +209,7 @@ void inorder()
         printf("Empty");
         return;
     }
-    printf("Inorder Traversal:");
+    printf("Inorder Traversal: ");
     inorderTraversal(root);
 }
 void postorder()
@@ -182,30 +219,39 @@ void postorder()
         printf("Empty");
         return;
     }
-    printf("Postorder Traversal:");
+    printf("Postorder Traversal: ");
     postorderTraversal(root);
 }
 void preorderTraversal(struct node *node)
 {
-    if(node==NULL)
+    if(node ==NULL)
     return;
-    printf("%d ",node->data);
-    preorderTraversal(node->left);
-    preorderTraversal(node->right);
+    else
+    {
+        printf("%d ",node->data);
+        preorderTraversal(node->left);
+        preorderTraversal(node->right);
+    }
 }
 void inorderTraversal(struct node *node)
 {
-    if(node==NULL)
+    if(node ==NULL)
     return;
-    inorderTraversal(node->left);
-    printf("%d ",node->data);
-    inorderTraversal(node->right);
+    else
+    {
+        inorderTraversal(node->left);
+        printf("%d ",node->data);
+        inorderTraversal(node->right);
+    }
 }
 void postorderTraversal(struct node *node)
 {
-    if(node==NULL)
+    if(node ==NULL)
     return;
-    postorderTraversal(node->left);
-    postorderTraversal(node->right);
-    printf("%d ",node->data);
+    else
+    {
+        postorderTraversal(node->left);
+        postorderTraversal(node->right);
+        printf("%d ",node->data);
+    }
 }

@@ -1,5 +1,6 @@
-f=open("file1.txt","r")
-contents=f.read()
-contents=contents.replace("pizza","cake")
-f=open("file1.txt","w")
-f.write(contents)
+with open("demo.txt","r") as f1:
+    lines=f1.read()
+print(lines)
+print("New list:")
+new=lines.replace("Vinu","Vinay")
+print(new)

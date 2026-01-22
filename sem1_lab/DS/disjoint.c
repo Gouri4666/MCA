@@ -1,10 +1,17 @@
 #include <stdio.h>
-
 #define MAX 100
 
 int parent[MAX];
 int elements[MAX];
 int n;
+
+// Function to create n disjoint sets
+void makeSet() 
+{
+    for (int i = 0; i < n; i++)
+        parent[i] = i; // each element is its own parent
+}
+
 
 // Function to find the index of an element in the elements array
 int getIndex(int x) {
@@ -15,14 +22,10 @@ int getIndex(int x) {
     return -1; // element not found
 }
 
-// Function to create n disjoint sets
-void makeSet() {
-    for (int i = 0; i < n; i++)
-        parent[i] = i; // each element is its own parent
-}
 
 // Function to find the representative of the set containing x
-int find(int x) {
+int find(int x) 
+{
     if (parent[x] == x)
         return x;
     else
@@ -30,11 +33,13 @@ int find(int x) {
 }
 
 // Function to unite two sets
-void unionSets(int x, int y) {
+void unionSets(int x, int y) 
+{
     int rootX = find(x);
     int rootY = find(y);
 
-    if (rootX == rootY) {
+    if (rootX == rootY) 
+    {
         printf("Both elements are already in the same set.\n");
         return;
     }
@@ -44,7 +49,8 @@ void unionSets(int x, int y) {
 }
 
 // Function to display the current parent relationships
-void displaySets() {
+void displaySets() 
+{
     printf("\nElement : ");
     for (int i = 0; i < n; i++)
         printf("%d ", elements[i]);
@@ -56,9 +62,9 @@ void displaySets() {
 }
 
 // Main function
-int main() {
+int main() 
+{
     int choice, a, b, idxA, idxB;
-
     printf("Enter number of elements: ");
     scanf("%d", &n);
 

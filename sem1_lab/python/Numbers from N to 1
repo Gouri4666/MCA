@@ -1,0 +1,7 @@
+#Print Numbers from N to 1
+def printn(n):
+    if n>=1:
+        print(n,end=" ")
+        printn(n-1)
+n=int(input("Enter n: "))
+printn(n)

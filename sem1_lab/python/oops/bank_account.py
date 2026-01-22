@@ -1,25 +1,34 @@
 class Bank:
-    def __init__(self,accno,name,type,bal):
+    def __init__(self,accno,bal=500):
         self.accno=accno
-        self.name=name
-        self.type=type
         self.bal=bal
-    def deposit(self,amount):
-        if amount>0:
-            self.bal+=amount
-            print(f"Amount deposited\nBalance:Rs.{self.bal}")
-        else:
-            print("Can;t deposit ")
     def withdraw(self,amount):
-        if amount<=self.bal:
+        if self.bal>=amount:
             self.bal-=amount
-            print(f"Amount withdrawn\nBalance:Rs.{self.bal}")
+            print(f"Balance: {self.bal}")
+
         else:
-            print("can't")
+            print("insufficient balance")
+    def deposit(self,amount):
+        self.bal+=amount
+        print(f"Balance: {self.bal}")
     def display(self):
-        print(f"Account no:{self.accno}")
-        print(f"Account name:{self.name}")
-        print(f"Account type:{self.type}")
-        print(f"Account balance:{self.bal}")
-b1=Bank(123,'gouri','savings',500)
-b1.withdraw(500)
+        print("Account number:",self.accno)
+        print("Account Balance:",self.bal)
+        
+
+
+b=Bank(123,500)
+ch=int(input("1.withdraw\n2.deposit\n3.display\nEnter choice:"))
+if ch==1:
+    amount=int(input("enter amount to withdraw:"))
+    b.withdraw(amount)
+elif ch==2:
+    amount=int(input("enter amount to deposit:"))
+    b.deposit(amount)
+elif ch==3:
+    b.display()
+else:
+    print("Invalid")
+
+        

@@ -8,3 +8,5 @@ def fibo(n):
         return fibo(n-1)+fibo(n-2)
 n=int(input("Enter a number: "))
 print(f"{n}th fibonnacci number : {fibo(n)}")
+for i in range(1,n+1):
+    print(fibo(i),end=" ")

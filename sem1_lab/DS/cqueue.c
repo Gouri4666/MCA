@@ -1,66 +1,71 @@
+//circular queue
 #include<stdio.h>
 #include<stdlib.h>
-# define N 50
-int cq[N];
-int f=-1,r=-1;
+#define MAX 25
+int queue[MAX];
+int f=-1;
+int r=-1;
 void enqueue()
 {
-    int item;
-    if((f==0 && r==N-1) || f==(r+1)%N)
-    printf("Overflow");
-    else
+    if((f==0 && r==MAX-1) || f==(r+1)%MAX)
     {
-        printf("Enter item to insert: ");
-        scanf("%d",&item);
-        if(f==-1)
-        {
-            f=r=0;
-            cq[r]=item;
-        }
-        else
-        {
-            r=(r+1)%N;
-            cq[r]=item;
-        }
-        printf("%d inserted",item);
+        printf("Full");
+        return;
     }
+    int value;
+    printf("Enter value to insert: ");
+    scanf("%d",&value);
+    if(f==-1)
+    {
+        f=r=0;
+        queue[r]=value;
+    }
+    else
+    {   
+        r=(r+1)%MAX;
+        queue[r]=value;
+    }
+    printf("Value inserted");
 }
 void dequeue()
 {
     int item;
     if(f==-1)
-    printf("Queue is empty");
+    {
+        printf("Empty");
+        return;
+    }
     else
     {
-         if(f==r)
+        item=queue[f];
+
+        if(f==r)
         {
-            item=cq[f];
             f=r=-1;
         }
         else
         {
-            item=cq[f];
-            f=(f+1)%N;
+            f=(f+1)%MAX;
         }
         printf("%d deleted",item);
     }
 }
 void display()
 {
-    if(f==-1)
-    printf("queue is empty");
-    else
+    if(f!=-1)
     {
         int i=f;
-        printf("Queue elements: ");
+        printf("Elements: ");
         while(1)
         {
-            printf("%d ",cq[i]);
+            printf("%d ",queue[i]);
             if(i==r)
             break;
-            i=(i+1)%N;
+            i=(i+1)%MAX;
         }
     }
+    else
+    printf("empty");
 }
 void count()
 {
@@ -68,9 +73,11 @@ void count()
     if(f!=-1)
     {
         if(r>=f)
-        c=r-f+1;
+        {
+            c=r-f+1;
+        }
         else
-        c=N-f+r+1;
+        c=MAX-f+r+1;
     }
     printf("Count: %d",c);
 }
@@ -101,4 +108,5 @@ int main()
         printf("\nDo you want to continue? (1/0): ");
         scanf("%d", &cont);
     } while (cont == 1);
+    return 0;
 }

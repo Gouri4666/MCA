@@ -1,5 +1,7 @@
 #count number of strings where string lenth is 2 or more and firts and last characters are same
-l=input("Enter list: ").split(" ")
-for item in l:
-    if len(item)>=2 and item[0]==item[-1]:
-        print(item,end=" ")
+n=input("Enter string: ")
+c=0
+if len(n)>2 and n[0]==n[-1]:
+    for items in n:
+                c=c+1
+print("Count: ",c)

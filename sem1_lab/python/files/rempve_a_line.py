@@ -1,13 +1,10 @@
-f1=open("file1.txt","r")
-lines=f1.readlines()
-f1.close()
-pos=int(input("Enter position: "))
-length=len(lines)
-if pos<=0 or pos>length:
-    print("Invalid ")
+with open("demo.txt","r") as f1:
+    lines=f1.readlines()
+print(lines)
+pos=int(input("Enter number of lines: "))
+if pos<0 or pos>len(lines):
+    print("Invalid position")
 else:
     lines.pop(pos-1)
-    f1=open("file1.txt","w")
-    f1.writelines(lines)
-    f1.close()
-
+    with open("demo2.txt","w") as f2:
+        f2.writelines(lines)

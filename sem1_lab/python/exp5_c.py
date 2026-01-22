@@ -1,9 +1,11 @@
 #sort dictionary
-dict1={'course':'python','language':'english',"difficulty":'medium'}
-print(sorted(dict1.keys()))
-print(sorted(dict1.keys(),reverse=True))
+d1={'name':'gouri','age':'two','course':'MCA'}
 
-print(sorted(dict1.values()))
-print(sorted(dict1.values(),reverse=True))
+print(sorted(d1))
+print(sorted(d1.keys()))
+print(sorted(d1.values()))
+print(sorted(d1.values(),reverse=True))
+
+
 
 

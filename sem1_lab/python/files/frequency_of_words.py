@@ -1,11 +1,12 @@
-f=open("file1.txt","r")
-words=f.read().lower().split()
+with open("demo.txt","r") as f1:
+    contents=f1.read().lower().split()
+print(contents)
 f={}
-for item in words:
-    if item in f:
-        f[item]+=1
+for items in contents:
+    if items in f:
+        f[items]+=1
     else:
-        f[item]=1
+        f[items]=1
 for word,count in f.items():
     print(f"{word}:{count}")
 

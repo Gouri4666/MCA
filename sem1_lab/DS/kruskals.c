@@ -1,75 +1,73 @@
-#include <stdio.h>
-
-#define MAX 100
-
+//kruskals
+#include<stdio.h>
+#include<conio.h>
+#define MAX 25
 int parent[MAX];
 
-// Function to find parent (with path compression)
-int find(int i) 
+int find(int i)
 {
-    while (parent[i] != i)
-        i = parent[i];
+    while(parent[i]!=i)
+    i=parent[i];
     return i;
 }
 
-// Function to unite two sets
-void unionSets(int i, int j) 
+void union_set(int i,int j)
 {
-    parent[i] = j;
+    parent[i]=j;
 }
 
-int main() 
+int main()
 {
-    int u[MAX], v[MAX], w[MAX];
-    int n, e, i, j;
-    int mincost = 0;
-
+    int i,j,u[MAX],v[MAX],w[MAX],e,n,mincost=0;
     printf("Enter number of vertices: ");
-    scanf("%d", &n);
+    scanf("%d",&n);
     printf("Enter number of edges: ");
-    scanf("%d", &e);
+    scanf("%d",&e);
 
-    printf("Enter edges (u v cost):\n");
-    for (i = 0; i < e; i++)
-        scanf("%d%d%d", &u[i], &v[i], &w[i]);
 
-    // Sort edges by cost (simple bubble sort)
-    for (i = 0; i < e - 1; i++) 
+    //enter all u v w
+    printf("Enter u-v-w:\n");
+    for(i=0;i<e;i++)
     {
-        for (j = 0; j < e - i - 1; j++) 
+        scanf("%d%d%d",&u[i],&v[i],&w[i]);
+    }
+
+
+    //buble sort
+    for(i=0;i<e-1;i++)
+    {
+        for(j=0;j<e-i-1;j++)
         {
-            if (w[j] > w[j + 1]) 
+            if(w[j]>w[j+1])
             {
-                int temp = w[j]; w[j] = w[j + 1]; w[j + 1] = temp;
-                temp = u[j]; u[j] = u[j + 1]; u[j + 1] = temp;
-                temp = v[j]; v[j] = v[j + 1]; v[j + 1] = temp;
+                int temp=w[j];w[j]=w[j+1];w[j+1]=temp;
+                temp=u[j];u[j]=u[j+1];u[j+1]=temp;
+                temp=v[j];v[j]=v[j+1];v[j+1]=temp;
             }
         }
     }
 
-    // Initialize parent array
-    for (i = 1; i <= n; i++)
-        parent[i] = i;
 
-    printf("\nEdges in Minimum Spanning Tree:\n");
+    //initialise parent array
+    for(i=1;i<=n;i++)
+    parent[i]=i;
 
-    int count = 0;
-    i = 0;
-    while (count < n - 1 && i < e) 
+
+    int count=0;
+    i=0;
+    printf("MCST:\n");
+    while(i<e && count<n-1)
     {
-        int a = find(u[i]);
-        int b = find(v[i]);
-
-        if (a != b) 
+        int a=find(u[i]);
+        int b=find(v[i]);
+        if(a!=b)
         {
-            printf("%d - %d : %d\n", u[i], v[i], w[i]);
-            mincost += w[i];
+            printf("%d - %d : %d\n",u[i],v[i],w[i]);
+            mincost+=w[i];
             count++;
-            unionSets(a, b);
+            union_set(a,b);
         }
         i++;
     }
-
-    printf("\nTotal Minimum Cost = %d\n", mincost);
-    return 0;
+    printf("Mincost: %d",mincost);
 }

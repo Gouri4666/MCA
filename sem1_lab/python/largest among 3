@@ -1,0 +1,2 @@
+l=list(map(int,input("Enter 3 numbers seperated by space: ").split(" ")))
+print("The largest number is:",max(l))

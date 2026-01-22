@@ -4,7 +4,6 @@ class Rectangle:
         self.length = length
         self.breadth = breadth
 
-
 # Derived Class
 class Cuboid(Rectangle):
     def __init__(self, length, breadth, height):
