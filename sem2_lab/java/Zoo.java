@@ -1,96 +1,76 @@
-import java.util.Scanner;
-
-class Zoo {
-
-    String name;
-    String[] regions;
-
-    Zoo(String name, String[] regions) {
-        this.name = name;
-        this.regions = regions;
+class Zoo
+{
+    String zname;
+    String [] regions;
+    Zoo(String zname,String [] regions)
+    {
+        this.zname=zname;
+        this.regions=regions;
     }
-
-    // Inner class
-    class Enclosure {
-        String name, type;
+    void display()
+    {
+        System.out.println("Zoo Name: "+zname);
+        System.out.print("Regions: ");
+        for(int i=0;i<regions.length;i++)
+        {
+            System.out.print(regions[i]+" ");
+        }
+    }
+    class Enclosure
+    {
+        String name;
+        String type;
         String[] animals;
-
-        Enclosure(String name, String type, String[] animals) {
-            this.name = name;
-            this.type = type;
-            this.animals = animals;
+        Enclosure( String name,String type,String[] animals)
+        {
+            this.name=name;
+            this.type=type;
+            this.animals=animals;
         }
-
-        void show() {
-            System.out.println("\nEnclosure: " + name);
-            System.out.println("Type: " + type);
+        void display()
+        {
+            System.out.println("Enclosure Name: "+name);
+            System.out.println("Enclosure Type: "+type);
             System.out.print("Animals: ");
-            for (String a : animals) System.out.print(a + " ");
-            System.out.println();
+            for(int i=0;i<animals.length;i++)
+            {
+                System.out.print(animals[i]+" ");
+            }
         }
     }
-
-    // Static nested class
-    static class Contact {
-        String address, phone;
-
-        Contact(String address, String phone) {
-            this.address = address;
-            this.phone = phone;
+    static class Contact
+    {
+        String address;
+        String phone;
+        Contact(String address,String phone)
+        {
+            this.address=address;
+            this.phone=phone;
         }
-
-        void show() {
-            System.out.println("\nAddress: " + address);
-            System.out.println("Phone: " + phone);
+        void display()
+        {
+            System.out.println("Address: "+address);
+            System.out.println("Phone: "+phone);
         }
-    }
-
-    void showZoo() {
-        System.out.print("\nZoo Name: " + name + "\nRegions: ");
-        for (String r : regions) System.out.print(r + " ");
-        System.out.println();
-    }
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Zoo Name: ");
-        String zname = sc.nextLine();
-
-        System.out.print("How many regions? ");
-        int n = sc.nextInt();
-        sc.nextLine();   // clear buffer
-
-        String[] regions = new String[n];
-        for (int i = 0; i < n; i++) {
-            System.out.print("Region " + (i + 1) + ": ");
-            regions[i] = sc.nextLine();
-        }
-
-        Zoo zoo = new Zoo(zname, regions);
-
-        System.out.print("Address: ");
-        String addr = sc.nextLine();
-        System.out.print("Phone: ");
-        String phone = sc.nextLine();
-
-        Contact contact = new Contact(addr, phone);
-
-        String[] animals1 = {"Lion", "Elephant"};
-        String[] animals2 = {"Parrot", "Eagle"};
-        String[] animals3 = {"Fish", "Turtle"};
-
-        Enclosure e1 = zoo.new Enclosure("Grassland", "Outdoor", animals1);
-        Enclosure e2 = zoo.new Enclosure("Flyzone", "Indoor", animals2);
-        Enclosure e3 = zoo.new Enclosure("Aquatic", "Outdoor", animals3);
-
-        zoo.showZoo();
-        contact.show();
-        e1.show();
-        e2.show();
-        e3.show();
-
-        sc.close();
     }
 }
+class ZooDemo
+{
+    public static void main(String[] args) 
+    {
+        String [] regions={"TVM","Kochi","Goa"};
+        Zoo z=new Zoo("City Zoo",regions);
+        z.display();
+        String[] animals={"Tiger","Lion"};
+        Zoo.Enclosure e=z.new Enclosure("Grassland","Outdoor",animals);
+        e.display();
+        Zoo.Contact c=new Zoo.Contact("Mumbai","9655874512");
+        c.display();
+    }
+}
+
+// Zoo Name: City Zoo
+// Regions: TVM Kochi Goa Enclosure Name: Grassland
+// Enclosure Type: Outdoor
+// Animals: Tiger Lion Address: Mumbai
+// Phone: 9655874512
