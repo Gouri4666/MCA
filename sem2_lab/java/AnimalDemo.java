@@ -1,8 +1,8 @@
-class Animal
+abstract  class Animal
 {
     private String species;
     protected int age;
-    protected int weight;
+    protected float weight;
     String color;
     Animal()
     {
@@ -11,7 +11,7 @@ class Animal
         weight=0;
         color="";
     }
-    Animal(String species,int age,int weight,String color)
+    Animal(String species,int age,float weight,String color)
     {
         this.species=species;
         this.age=age;
@@ -25,10 +25,8 @@ class Animal
         this.weight=other.weight;
         this.color=other.color;
     }
-    void display()
-    {  
-    }
-    String getSpecies()
+    abstract void display();
+    String getspecies()
     {
         return species;
     }
@@ -36,58 +34,71 @@ class Animal
 class Dog extends Animal
 {
     String breed;
-    String name;
+    String bname;
     String owner;
-    Dog(String species,int age,int weight,String color,String breed,String name,String owner)
+    Dog(String species,int age,float weight,String color,String breed,String bname,String owner)
     {
         super(species,age,weight,color);
         this.breed=breed;
-        this.name=name;
+        this.bname=bname;
         this.owner=owner;
     }
     void display()
     {
-        System.out.println("Dog Details");
-        System.out.println("Species: "+getSpecies());
-        System.out.println("Age: "+age);
-        System.out.println("Weight: "+weight);
-        System.out.println("Color: "+color);
-        System.out.println("Name: "+name);
-        System.out.println("Breed: "+breed);
-        System.out.println("Owner: "+owner);
-        
+        System.out.println("\nDog Details");
+        System.out.println("Species :"+getspecies());
+        System.out.println("Age :"+age);
+        System.out.println("Weight :"+weight);
+        System.out.println("Color :"+color);
+        System.out.println("Breed :"+breed);
+        System.out.println("Breed name :"+bname);
+        System.out.println("Breed owner :"+owner);
     }
 }
 class Cat extends Animal
 {
-    String name;
-    String eyeColor;
-    int tailLength;
-    Cat(String species,int age,int weight,String color,String name,String eyeColor,int tailLength)
+    String cname;
+    String eyecolor;
+    float  taillength;
+    Cat(String species,int age,float weight,String color,String cname,String eyecolor,float  taillength)
     {
         super(species,age,weight,color);
-        this.name=name;
-        this.eyeColor=eyeColor;
-        this.tailLength=tailLength;
+        this.cname=cname;
+        this.eyecolor=eyecolor;
+        this.taillength=taillength;
     }
     void display()
     {
-        super.display();
         System.out.println("\nCat Details");
-        System.out.println("Cat Name: "+name);
-        System.out.println("Cat Eye Color: "+eyeColor); 
-        System.out.println("Cat Tail Length: "+tailLength);
+        System.out.println("cat Name :"+cname);
+        System.out.println("Eye color :"+eyecolor);
+        System.out.println("Tail Length :"+taillength);
+
     }
 }
-class AnimalDemo
+public class AnimalDemo
 {
-    public static void main(String[] args)
+    public static void main(String[] args) 
     {
-        //dynamic method dispatch
-        Animal a;
-        a=new Dog("mammal",2,6,"Brown","Pomeranian","Tobby","Hari");
-        a.display();
-        a=new Cat("Mammal",2,5,"Orange","Snowbell","Green",15);
-        a.display();
+        Animal a1=new Dog("mammal",2,52,"Black","Lab","Tobbby","Jose");
+        a1.display();
+        Animal a2=new Cat("mammal",3,15,"White","Miz","Green",12);
+        a2.display();
+        
     }
 }
+
+//----output----------
+// Dog Details
+// Species :mammal
+// Age :2
+// Weight :52.0
+// Color :Black
+// Breed :Lab
+// Breed name :Tobbby
+// Breed owner :Jose
+
+// Cat Details
+// cat Name :Miz
+// Eye color :Green
+// Tail Length :12.0
