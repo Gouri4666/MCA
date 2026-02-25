@@ -1,8 +1,8 @@
 interface Comparable
 {
     public double volume();
-
 }
+//cuboid
 class Cuboid implements Comparable
 {
     int l,b,h;
@@ -17,6 +17,7 @@ class Cuboid implements Comparable
         return l*b*h;
     }
 }
+//cylinder
 class Cylinder implements Comparable
 {
     int r,h;
@@ -30,6 +31,7 @@ class Cylinder implements Comparable
         return Math.PI*r*r*h;
     }
 }
+//main
 public class ComparableDemo 
 {
     public static void main(String[]  args)
@@ -52,4 +54,11 @@ public class ComparableDemo
             System.out.println("Both have equal volume");
         }
     }   
-}
+} 
+
+
+// Volume of Cylinder: 549.7787143782139
+// Volume of Cuboid: 30.0
+// Cylinder has greater volumeVolume of Cylinder: 549.7787143782139
+// Volume of Cuboid: 30.0
+// Cylinder has greater volume
