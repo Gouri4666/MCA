@@ -1,0 +1,17 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+DECLARE
+    n NUMBER:= &number;
+    fact NUMBER:=1;
+BEGIN
+    FOR i IN 1..n LOOP
+        fact:=fact*i;
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('Factorial: ' || fact);
+END;
+/
+
+---output---
+Enter value for number: 5
+Factorial: 120
