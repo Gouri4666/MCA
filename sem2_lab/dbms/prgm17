@@ -1,0 +1,12 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+DECLARE
+    n NUMBER := &number;
+BEGIN
+	IF n MOD 2 = 0 THEN
+		DBMS_OUTPUT.PUT_LINE(n||' is even');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE(n||' is odd');
+	END IF;
+END;
+/
