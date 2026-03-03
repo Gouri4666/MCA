@@ -1,0 +1,10 @@
+//: Write a PL/SQL program to calculate area of a circle.
+SET SERVEROUTPUT ON
+DECLARE
+    r NUMBER := 5;
+    area NUMBER;
+BEGIN
+    area := 3.14 * r * r;
+    DBMS_OUTPUT.PUT_LINE('Area = ' || area);
+END;
+/
