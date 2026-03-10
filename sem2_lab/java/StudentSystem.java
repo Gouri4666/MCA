@@ -5,7 +5,7 @@ public class StudentSystem {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        HashMap<Integer,String> students = new HashMap<>();
+        HashMap<Integer, String> students = new HashMap<>();
 
         int choice;
         char cont;
@@ -14,9 +14,9 @@ public class StudentSystem {
 
             System.out.println("\n1 Add Student");
             System.out.println("2 Search Student");
-            System.out.println("3 Display All");
+            System.out.println("3 Display Students");
 
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter choice: ");
             choice = sc.nextInt();
 
             switch(choice) {
@@ -30,6 +30,7 @@ public class StudentSystem {
                     String name = sc.nextLine();
 
                     students.put(id, name);
+                    System.out.println("Student added");
                     break;
 
                 case 2:
@@ -40,19 +41,23 @@ public class StudentSystem {
                         System.out.println("Name: " + students.get(id));
                     else
                         System.out.println("Student not found");
+
                     break;
 
                 case 3:
                     System.out.println("\nStudent List:");
-                    for(Map.Entry<Integer,String> entry : students.entrySet())
-                        System.out.println(entry.getKey() + " " + entry.getValue());
+
+                    for(Integer idKey : students.keySet()) {
+                        System.out.println(idKey + " " + students.get(idKey));
+                    }
+
                     break;
 
                 default:
                     System.out.println("Invalid choice");
             }
 
-            System.out.print("\nDo you want to continue (y/n)? ");
+            System.out.print("\nContinue? (y/n): ");
             cont = sc.next().charAt(0);
 
         } while(cont == 'y' || cont == 'Y');
