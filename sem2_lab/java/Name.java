@@ -99,4 +99,42 @@ public class Name
         System.out.println("Program ended.");
         sc.close();
     }
-}
+// }
+// MENU
+// 1.Add Name
+// 2.Remove Name
+// 3.Search Name
+// 4.Sort Names
+// 5.Display Names
+// 6.Exit
+// Enter your choice: 1
+// Enter name to add: jimmy
+// Name added successfully.
+
+// Do you want to continue? (Y/N): y
+
+// MENU
+// 1.Add Name
+// 2.Remove Name
+// 3.Search Name
+// 4.Sort Names
+// 5.Display Names
+// 6.Exit
+// Enter your choice: 2
+// Enter name to remove: lita
+// Name not found.
+
+// Do you want to continue? (Y/N): y
+
+// MENU
+// 1.Add Name
+// 2.Remove Name
+// 3.Search Name
+// 4.Sort Names
+// 5.Display Names
+// 6.Exit
+// Enter your choice: 2
+// Enter name to remove: jimmy 
+// Name removed successfully.
+
+// Do you want to continue? (Y/N):
