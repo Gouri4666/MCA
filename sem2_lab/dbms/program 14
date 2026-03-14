@@ -1,0 +1,14 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+
+DECLARE
+    n1 NUMBER := 5;
+    n2 NUMBER := 2;
+    total NUMBER;
+BEGIN
+    total := n1 + n2;
+
+    DBMS_OUTPUT.PUT_LINE('Sum: ' || total);
+END;
+/
+
