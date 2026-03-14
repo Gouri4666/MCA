@@ -1,0 +1,23 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+create or replace function maximum(a in number,b in number)
+	return number is
+		maxv number;
+BEGIN
+	if a>b then
+		maxv:=a;
+	else
+		maxv:=b;
+	end if;
+	return maxv;
+END;
+/
+DECLARE
+	n1 number:=&number1;
+	n2 number:=&number2;
+	res number;
+BEGIN
+	res:=maximum(n1,n2);
+	DBMS_OUTPUT.PUT_LINE('Maximum: ' || res);
+END;
+/
