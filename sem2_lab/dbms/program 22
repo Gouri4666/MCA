@@ -1,0 +1,18 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+create or replace function area(r in number)
+	return number is
+		area number;
+BEGIN
+	area:=3.14*r*r;
+	return area; 
+END;
+/
+DECLARE
+	n number:=&number;
+	res number;
+BEGIN
+	res:=area(n);
+	DBMS_OUTPUT.PUT_LINE('area: ' || res);
+END;
+/
