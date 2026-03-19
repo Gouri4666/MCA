@@ -1,14 +1,15 @@
 //Demonstrate the Reader-Writer problem where the writer writes before the reader reads.
-
 class ReaderWriter {
 
     static int data = 100;
     static boolean written = false;
 
-    // Writer
+    static final Object lock = new Object(); // simple lock object
+
+    // Writer Thread
     static class Writer extends Thread {
         public void run() {
-            synchronized (ReaderWriter.class) {
+            synchronized (lock) {
                 System.out.println("Writer is writing...");
 
                 try {
@@ -20,18 +21,18 @@ class ReaderWriter {
                 written = true;
                 System.out.println("Writer finished writing");
 
-                ReaderWriter.class.notify(); // wake reader
+                lock.notify(); 
             }
         }
     }
 
-    // Reader
+    // Reader Thread
     static class Reader extends Thread {
         public void run() {
-            synchronized (ReaderWriter.class) {
+            synchronized (lock) {
                 while (!written) {
                     try {
-                        ReaderWriter.class.wait(); // wait for writer
+                        lock.wait(); // wait for writer
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -44,10 +45,16 @@ class ReaderWriter {
     }
 
     public static void main(String[] args) {
-        Writer w = new Writer();
         Reader r = new Reader();
+        Writer w = new Writer();
 
-        r.start(); // start reader first (it will wait)
-        w.start(); // writer writes and notifies
+        r.start(); // reader waits
+        w.start(); // writer writes first
     }
 }
+
+//--------output-------------
+// Writer is writing...
+// Writer finished writing
+// Reader is reading...
+// Data read: 100
