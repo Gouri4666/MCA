@@ -1,69 +1,53 @@
 //Demonstrate the Reader-Writer problem where the writer writes before the reader reads.
 
-class SharedData {
-    private String data;
-    private boolean hasData = false;
+class ReaderWriter {
 
-    public synchronized void write(String value) {
-        while (hasData) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    static int data = 100;
+    static boolean written = false;
+
+    // Writer
+    static class Writer extends Thread {
+        public void run() {
+            synchronized (ReaderWriter.class) {
+                System.out.println("Writer is writing...");
+
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                written = true;
+                System.out.println("Writer finished writing");
+
+                ReaderWriter.class.notify(); // wake reader
             }
         }
-        data = value;
-        System.out.println("Writer wrote: " + data);
-        hasData = true;
-        notify();
     }
 
-    public synchronized void read() {
-        while (!hasData) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    // Reader
+    static class Reader extends Thread {
+        public void run() {
+            synchronized (ReaderWriter.class) {
+                while (!written) {
+                    try {
+                        ReaderWriter.class.wait(); // wait for writer
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                System.out.println("Reader is reading...");
+                System.out.println("Data read: " + data);
             }
         }
-        System.out.println("Reader read: " + data);
-        hasData = false;
-        notify();
-    }
-}
-
-class Writer extends Thread {
-    SharedData data;
-
-    Writer(SharedData data) {
-        this.data = data;
     }
 
-    public void run() {
-        data.write("Hello from Writer");
-    }
-}
-
-class Reader extends Thread {
-    SharedData data;
-
-    Reader(SharedData data) {
-        this.data = data;
-    }
-
-    public void run() {
-        data.read();
-    }
-}
-
-public class ReaderWriter {
     public static void main(String[] args) {
-        SharedData data = new SharedData();
+        Writer w = new Writer();
+        Reader r = new Reader();
 
-        Writer writer = new Writer(data);
-        Reader reader = new Reader(data);
-
-        writer.start();
-        reader.start();
+        r.start(); // start reader first (it will wait)
+        w.start(); // writer writes and notifies
     }
 }
