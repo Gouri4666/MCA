@@ -52,3 +52,7 @@ public class AccountTransaction {
         u2.start();
     }
 }
+
+// output
+// Deposited: 500 | Balance: 1500
+// Withdrawn: 700 | Balance: 800
