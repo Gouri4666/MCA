@@ -36,3 +36,11 @@ b)	 Entity Integrity Constraint
 c)	 Unique Key Constraints
 d)	Referential Integrity Constraint 
 ---------------------------------------------------------------------------------------------------------------------
+PROG 25
+Create a database named "Company" in MongoDB and add a collection called "Employee" with the following fields: EmpId, EmpName, DOB, Salary and Designation.
+a)	Insert records into the collection.
+b)	Fetch all records from the collection.
+c)	List all the details of Employee in a neat format.
+d)	List the details of a specific employee.
+---------------------------------------------------------------------------------------------------------------------
+
