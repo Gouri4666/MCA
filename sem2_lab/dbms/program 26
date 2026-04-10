@@ -1,0 +1,26 @@
+
+
+use college
+db.createCollection("student")
+
+db.student.insertOne({_id:1,name:"anu",age:21,gender:"female",dept:"mca",sub1:70,sub2:80,attendance:78})
+db.student.insertOne({_id:2,name:"manu",age:23,gender:"male",dept:"mechanical",sub1:70,sub2:80,attendance:78})
+db.student.insertOne({_id:3,name:"banu",age:21,gender:"female",dept:"computer science",sub1:85,sub2:90,attendance:87})
+db.student.insertOne({_id:4,name:"shinu",age:26,gender:"female",dept:"electronics",sub1:85,sub2:90,attendance:97})
+db.student.insertOne({_id:5,name:"malu",age:26,gender:"female",dept:"electronics",sub1:95,sub2:90,attendance:97})
+db.company.insertOne({_id:6,name:"amalu",age:26,gender:"female",dept:"computer science",sub1:95,sub2:70,attendance:87})
+
+
+db.student.find({sub1:{$gt:80},sub2:{$gt:80}})
+	
+db.student.find({$or:[{dept:"computer science"},{age:{$gt:22}}]})
+
+db.student.find({dept:{$ne:"electronics"}})
+or
+b.student.find({$and:[{dept:{$ne:"mechanical"}},{dept:{$ne:"civil"}}]})
+
+db.student.find({$nor:[{sub1:{$gte:80},attendance:{$gte:85}}]})
+
+db.student.find({dept:{$nin:["mechanical","civil"]}})
+
+
