@@ -1,3 +1,10 @@
+/*Create a database named "College" in MongoDB and add a collection called "Student" with the following fields: Id, Name, Age, Gender, Department, Sub1, Sub2, Attendance.
+a)	Find students who scored more than 80 in both subjects.
+b)	List students who are either in the "Computer Science" department or are older than 22.
+c)	Find students who are not in the "Electronics" department.
+d)	Retrieve students who neither scored above 80 in sub1 nor have attendance more than 85%.
+e)	Find students who are neither in "Mechanical" nor in "Civil" departments.
+*/
 
 
 use college
