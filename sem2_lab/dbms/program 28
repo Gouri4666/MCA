@@ -1,0 +1,17 @@
+Create a database named "Company" in MongoDB and add a collection called "Employee" with the following fields: EmpId, EmpName, DOB, Salary and Designation.
+a)	Retrieve documents where the EmpName starts with the letter "S".
+b)	Increase the salary of the employee by 1000 based on a user-specified EmpName.
+c)	Add a new field named DOJ to existing documents in the Employee collection. 
+d)	Fetch all records from the collection.
+e)	Delete a document from the Employee collection based on a user-specified EmpId.
+
+
+db.createCollection("employee")
+db.employee.insertOne({empid:1,empname:"hari",dob:new Date('2003-12-01'),salary:45000,desig:"hr"})
+db.employee.insertOne({empid:2,empname:"priya",dob:new Date('2000-12-01'),salary:40000,desig:"developer"})
+db.employee.insertOne({empid:3,empname:"sara",dob:new Date('2001-12-01'),salary:30000,desig:"developer"})
+db.employee.find({empname:{$regex:"^s"}})
+db.employee.updateOne({empname:"sara"},{$inc:{salary:500}})
+db.employee.updateMany({},{$set:{doj:new Date('2022-05-12')}})
+db.employee.find()
+db.employee.deleteOne({empid
