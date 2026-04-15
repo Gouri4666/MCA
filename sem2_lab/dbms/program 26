@@ -24,10 +24,13 @@ db.student.find({$or:[{dept:"computer science"},{age:{$gt:22}}]})
 
 db.student.find({dept:{$ne:"electronics"}})
 or
-b.student.find({$and:[{dept:{$ne:"mechanical"}},{dept:{$ne:"civil"}}]})
+db.student.find({dept:{$nin:["electronics"]}})
 
+db.student.find({sub1:{$lt:80},attendance:{$lt:85}}
+or
 db.student.find({$nor:[{sub1:{$gte:80},attendance:{$gte:85}}]})
 
 db.student.find({dept:{$nin:["mechanical","civil"]}})
-
+or
+db.student.find({$and:[{dept:{$ne:"mechanical"}},{dept:{$ne:"civil"}}]})
 
