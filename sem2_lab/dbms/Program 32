@@ -1,5 +1,17 @@
 Create a procedure named CountEmployees that count the number of employees in a specific department.
 
+CREATE TABLE employee (
+    empid NUMBER,
+    empname VARCHAR2(50),
+    dept VARCHAR2(20)
+);
+INSERT INTO employee VALUES (1,'Manu','HR');
+INSERT INTO employee VALUES (2,'Hari','HR');
+INSERT INTO employee VALUES (3,'Sara','IT');
+INSERT INTO employee VALUES (4,'Arun','HR');
+COMMIT;
+
+
 set serveroutput on;
 create or replace procedure count_employee(deptname in varchar,empcount out number)
 is
