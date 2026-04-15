@@ -1,0 +1,30 @@
+Write an after delete trigger to insert deleted record into a backup employee table.
+
+CREATE TABLE employee (
+    empid NUMBER,
+    empname VARCHAR2(50),
+    salary NUMBER
+);
+
+INSERT INTO employee VALUES (1,'Manu',20000);
+INSERT INTO employee VALUES (2,'Hari',15000);
+COMMIT;
+
+CREATE TABLE employee_backup (
+    empid NUMBER,
+    empname VARCHAR2(50),
+    salary NUMBER
+);
+
+CREATE OR REPLACE TRIGGER backup_delete
+AFTER DELETE ON employee
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_backup
+    VALUES (:OLD.empid, :OLD.empname, :OLD.salary);
+END;
+/
+
+DELETE FROM employee WHERE empid = 1;
+SELECT * FROM employee_backup;
+1   Manu   20000
