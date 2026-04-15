@@ -1,0 +1,11 @@
+/*
+Create a database named "Company" in MongoDB and add a collection called "Employee" with the following fields: EmpId, EmpName, DOB, Salary and Designation.
+a)	Create multiple users with different roles.
+b)	Insert and update a document into the Employee collection while logged in as a read-write user.
+*/
+
+db.createUser({user:"gouri",pwd:"gouri123",roles:[{role:"read",db:"company"}]})
+
+db.auth("gouri","gouri123")
+
+db.employee.insertOne({empid:10,empname:"sara",dob:new Date('2001-12-01'),salary:30000,desig:"developer"})
