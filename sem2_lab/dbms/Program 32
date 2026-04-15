@@ -1,0 +1,26 @@
+Create a procedure named CountEmployees that count the number of employees in a specific department.
+
+set serveroutput on;
+create or replace procedure count_employee(deptname in varchar,empcount out number)
+is
+begin
+	select count(*) into empcount
+	from employee
+	where dept=deptname;
+end;
+/
+declare
+	res number;
+begin
+	count_employee('HR',res);
+	dbms_output.put_line('Count: '||res);
+end;
+/
+
+
+output
+Procedure created.
+
+Count: 3
+
+PL/SQL procedure successfully completed.
