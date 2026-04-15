@@ -7,8 +7,12 @@ db.createCollection("customer")
 db.customer.insertOne({id:"c123",name:"hari",email:"hari@gmail.com",phone:9400956235,address:"mumbai",order_id:"o123",order_date:new Date('2025-10-02')})
 db.customer.insertOne({id:"c124",name:"manu",email:"manu@gmail.com",phone:9470956335,address:"delhi",order_id:"o124",order_date:new Date('2022-10-02')})
 db.customer.insertOne({id:"c125",name:"Athira",email:"athira@gmail.com",phone:785956335,address:"delhi",order_id:"o125",order_date:new Date('2020-11-12')})
+
 db.customer.updateOne({id:"c123"},{$set:{email:"harinew@gmail.com"}})
-db.customer.deleteMany({order_date:{$lt:new Date('2025-01-01')}})
+
+db.employee2.deleteMany({order_date:{$lt:new Date('2025-01-01')}},{order_date:{$gt:new Date('2024-12-31')}})
+
 db.customer.updateMany({},{$set:{orders:6}})
+
 db.customer.find({name:{$regex:"^A",$options:"i"},orders:{$gt:5}})
 
