@@ -1,0 +1,57 @@
+Create a procedure or calculate the total mark of three subjects and store the value in the sectional exam table.
+
+CREATE TABLE sessional_exam (
+    rollno NUMBER,
+    sub1 NUMBER,
+    sub2 NUMBER,
+    sub3 NUMBER,
+    total NUMBER
+);
+
+SET SERVEROUTPUT ON;
+set verify off;
+CREATE OR REPLACE PROCEDURE calc_total_marks(
+    rno IN NUMBER,
+    m1 IN NUMBER,
+    m2 IN NUMBER,
+    m3 IN NUMBER,	
+    total_marks out number
+)
+IS
+    
+BEGIN
+   
+    total_marks := m1 + m2 + m3;
+
+    INSERT INTO sessional_exam
+    VALUES (rno, m1, m2, m3, total_marks);
+
+    DBMS_OUTPUT.PUT_LINE('Total Marks = ' || total_marks);
+END;
+/
+declare
+	id number:=&id;
+	m1 number:=&mark1;
+	m2 number:=&mark2;
+	m3 number:=&mark3;
+	total_marks number;
+BEGIN
+    calc_total_marks(id, m1, m2, m3,total_marks);
+END;
+/
+
+output
+Enter value for id: 102
+Enter value for mark1: 50
+Enter value for mark2: 45
+Enter value for mark3: 30
+Total Marks = 125
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from sessional_exam;
+
+STUDENT_ID      MARK1      MARK2      MARK3      TOTAL
+---------- ---------- ---------- ---------- ----------
+       101         80         90         70        240
+       102         50         45         30        125
