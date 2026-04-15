@@ -1,0 +1,21 @@
+Create database Organization in mongodb and make Collection with name "Employee "                                                                              
+             
+EmpId	EmpName	Salary	Designation
+101	Ram	15000	Clerk
+102	Shyam	20000	Administrator
+103	Hari	10000	Supervisor
+104	Sita	15000	Clerk
+105	Rose	20000	Administrator
+106	Maria	25000	Manager
+a)	Insert Records into Employee Details Collection
+b)	List all the details of employees in a neat format.
+c)	Find Document From the Employee Details collection where name begins with S
+d)	Update Salary Of Employee where Name is "Sita" by +1000
+e)	Add a New Field Date of Joining to document with name "DOJ" 
+f)	Find sum of salaries of employees with designation as “clerk”
+g)	Delete a document having employee id with 106.
+h)	Create a user with name “Mohan” and give read/write role to the user for Employee database.
+
+*/
+
+db.employee.aggregate([{$match:{designation:"HR"}},{$group:{_id:null,totalsalary:{$sum:"$salary"}}}])
