@@ -1,60 +1,74 @@
 //Demonstrate the Reader-Writer problem where the writer writes before the reader reads.
-class ReaderWriter {
-
-    static int data = 100;
-    static boolean written = false;
-
-    static final Object lock = new Object(); // simple lock object
-
-    // Writer Thread
-    static class Writer extends Thread {
-        public void run() {
-            synchronized (lock) {
-                System.out.println("Writer is writing...");
-
-                try {
-                    Thread.sleep(500);
-                } catch (Exception e) {
+class Test
+{
+    static int data=100;
+    static boolean written=false;
+    static final Object lock=new Object();
+    static class Writer extends Thread
+    {
+        public void run()
+        {
+            synchronized (lock)
+            {
+                System.out.println("writer is writing...");
+                data=150;
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch(Exception e)
+                {
                     e.printStackTrace();
                 }
-
-                written = true;
+                written=true;
+                lock.notify();
                 System.out.println("Writer finished writing");
-
-                lock.notify(); 
+                System.out.println("New data: "+data);
             }
         }
     }
-
-    // Reader Thread
-    static class Reader extends Thread {
-        public void run() {
-            synchronized (lock) {
-                while (!written) {
-                    try {
-                        lock.wait(); // wait for writer
-                    } catch (Exception e) {
+    static class Reader extends Thread
+    {
+        public void run()
+        {
+            synchronized(lock)
+            {
+                while(!written)
+                {
+                    try
+                    {
+                        lock.wait();
+                    }
+                    catch(Exception e)
+                    {
                         e.printStackTrace();
                     }
                 }
-
                 System.out.println("Reader is reading...");
-                System.out.println("Data read: " + data);
+                try
+                {
+                Thread.sleep(1000);
+                }
+                catch(Exception e)
+                {
+                    System.err.println();
+                }
+                System.out.println("Data: "+data);
             }
         }
     }
-
     public static void main(String[] args) {
-        Reader r = new Reader();
-        Writer w = new Writer();
-
-        r.start(); // reader waits
-        w.start(); // writer writes first
+        Writer w1=new Writer();
+        Reader r1=new Reader();
+        System.out.println("Initail data: "+data);
+        w1.start();;
+        r1.start();
     }
 }
-
 //--------output-------------
-// Writer is writing...
+// Initail data: 100
+// writer is writing...
 // Writer finished writing
+// New data: 150
 // Reader is reading...
-// Data read: 100
+// Data: 150
