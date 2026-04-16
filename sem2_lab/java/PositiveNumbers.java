@@ -1,43 +1,44 @@
 import java.util.*;
 
-class NegativeException extends Exception {
-    public NegativeException(String message) {
-        super(message);
+class NegativeNumberException extends Exception {
+    NegativeNumberException(String msg) {
+        super(msg);
     }
 }
 
-public class PositiveNumbers {
-
-    static void checkNumber(int num) throws NegativeException {
-        if (num <= 0)
-            throw new NegativeException("Number must be positive");
-    }
-
+class Test {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N, num, count = 0;
-        float sum = 0;
 
-        System.out.print("Enter N: ");
-        N = sc.nextInt();
+        int n, num, sum = 0, count = 0;
 
-        while (count < N) {  // loop until exactly N positive numbers are entered
-            System.out.print("Enter number " + (count + 1) + ": ");
-            num = sc.nextInt();
+        System.out.print("Enter how many numbers: ");
+        n = sc.nextInt();
 
+        int i = 1;
+
+        while (count < n) {
             try {
-                checkNumber(num);
-                sum += num;   
-                count++;      
-            } catch (NegativeException e) {
-                System.out.println("Exception: " + e.getMessage());
-                System.out.println("Please enter a positive number.");
+                System.out.print("Enter number " + i + ": ");
+                num = sc.nextInt();
+
+                if (num < 0) {
+                    throw new NegativeNumberException("Negative number not allowed");
+                }
+
+                sum += num;
+                count++;
+                i++;
+
+            } catch (NegativeNumberException e) {
+                System.out.println(e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter integer only.");
+                sc.next(); // clear wrong input
             }
         }
 
-        double average = (double) sum / N;
-        System.out.println("Average = " + average);
-
-        sc.close();
+        double avg = (double) sum / n;
+        System.out.println("Average = " + avg);
     }
 }
