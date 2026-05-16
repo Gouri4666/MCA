@@ -1,0 +1,16 @@
+Create table Product with fields
+( ProductID, Name, Category, Manufacturing date,Quantity, Price)
+a) Select specific columns from a table.
+b) Rename a column in the result set.
+c) Delete a record
+d) Perform Order by
+e) Perform Group by
+
+ create table product(pid number,name varchar(25),category varchar(25),mdate date,quantity number,proce number);
+insert into product values(1,'mobile','electronics','23-jan-2015',150,38000);
+ insert into product values(2,'laptop','electronics','23-jan-2017',70,48000);
+select name,proce from product;
+alter table product rename column proce to price;
+delete from product where pid=1;
+ select name,price from product order by price;
+select category,sum(price) from product group by category;
