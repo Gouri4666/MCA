@@ -1,0 +1,15 @@
+a) Create a table Student with fields (Roll No, Name, Course, Year)
+b) Alter table
+c) Truncate table
+d) Drop table
+Write necessary query statements
+
+Query
+a)create table student(rollno number,name varchar(25),course varchar(25),year number);
+
+b)alter table student rename column name to fullname;
+alter table student modify fullname number;
+
+c)truncate table student;
+
+ d)drop table student;
