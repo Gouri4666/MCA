@@ -1,0 +1,11 @@
+Execute DML statements
+
+Create table Employee with fields
+( Emp_ID, Emp_Name, DOB, Dept, Designation, Salary)
+a) Insert values into table
+b) Write a basic SELECT query to retrieve all columns from a table.
+
+query
+ create table employee (empid number,empname varchar(25),dob date,desig varchar(25),salary number);
+a)insert into employee values(1,'priya','12-jan-1998','CS','HR',35000)
+b)select * from employee;
