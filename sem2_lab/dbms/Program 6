@@ -1,0 +1,17 @@
+Perform Nested Query operations
+Sailors (Sid, Sname, Rating, Age)
+Boats (Bid, Bname, Color)
+Reserves (Sid, Bid, Day)
+a) Find all information of sailors who have reserved boat number 101 or 103
+b) Find names of sailors who have reserved at least one boat
+c) Find names of sailors who have reserved a red boat and list in the order of their age
+d) Find the ids and names of sailors who have reserved two different boats on the same day
+e) Find the name and the age of the youngest sailor.
+f) Find the names of sailors who have reserved all boats.
+
+Query
+select * from sailors where sid in (select sid from reserves where bid=101 or bid=103);
+select * from sailors where sid in (select sid from reserves);
+select sname,age from sailors where sid in (select sid from reserves where bid in (select bid from boats where color='red')) order by age;
+
+select sname,age from sailors where age=(select min(age) from sailors);
