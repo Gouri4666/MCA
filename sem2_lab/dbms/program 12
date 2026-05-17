@@ -1,0 +1,7 @@
+Perform Nested Query operations
+1. Find the ids of sailors who have reserved a red boat or a green boat.
+2. Find the names of sailors who have reserved boat 102.
+
+query
+1. select distinct sid from reserves where bid in (select bid from boats where color='red' or color='green');
+2.  select sname from sailors where sid in (select sid from reserves where bid=102);
