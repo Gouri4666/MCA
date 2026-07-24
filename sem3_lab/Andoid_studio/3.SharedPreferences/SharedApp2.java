@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public abstract class SharedApp2 extends AppCompatActivity implements View.OnClickListener {
+public class SharedApp2 extends AppCompatActivity implements View.OnClickListener {
     Button prev;
     TextView t;
     SharedPreferences sp;
@@ -31,12 +31,15 @@ public abstract class SharedApp2 extends AppCompatActivity implements View.OnCli
             return insets;
         });
         prev=(Button) findViewById((R.id.prev));
+        prev.setOnClickListener(this);
         sp=getSharedPreferences("MyData",MODE_PRIVATE);
+
         t=(TextView) findViewById(R.id.namestring);
         if (sp.contains("Name"))
             t.setText("WELCOME "+sp.getString("Name",""));
 
     }
+    @Override
     public void onClick(View v)
     {
         Intent i=new Intent(this,MainActivity.class);
