@@ -1,4 +1,4 @@
-package com.example.sharedapp;
+package com.example.loginapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,11 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v)
     {
-        a=name.getText().toString();
-        SharedPreferences.Editor editor=sp.edit();
-        editor.putString("Name",a);
+        String username = name.getText().toString();
+        String useremail = email.getText().toString();
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("Name", username);
+        editor.putString("Email", useremail);
         editor.apply();
-        Intent i=new Intent(this, SharedApp2.class);
+
+        Intent i = new Intent(MainActivity.this, MainActivity2.class);
         startActivity(i);
     }
 }
