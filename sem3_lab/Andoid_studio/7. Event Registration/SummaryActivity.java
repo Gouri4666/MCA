@@ -27,7 +27,10 @@ public class SummaryActivity extends AppCompatActivity {
 
         // Retrieve data from SharedPreferences
         SharedPreferences sp =
-                getSharedPreferences("Registration", MODE_PRIVATE);
+                getSharedPreferences(
+                        "Registration",
+                        MODE_PRIVATE
+                );
 
         String name = sp.getString("name", "");
         String email = sp.getString("email", "");
@@ -44,37 +47,48 @@ public class SummaryActivity extends AppCompatActivity {
         tvSummary.setText(summary);
 
         // Back to Edit
-        btnBack.setOnClickListener(v -> {
+        btnBack.setOnClickListener(new View.OnClickListener() {
 
-            Intent intent =
-                    new Intent(SummaryActivity.this,
-                            MainActivity.class);
+            @Override
+            public void onClick(View v) {
 
-            startActivity(intent);
+                Intent intent =
+                        new Intent(
+                                SummaryActivity.this,
+                                MainActivity.class
+                        );
 
-            finish();
+                startActivity(intent);
+
+                finish();
+            }
         });
 
         // Confirm Registration
-        btnConfirm.setOnClickListener(v -> {
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
 
-            // Inflate custom Toast layout
-            LayoutInflater inflater =
-                    getLayoutInflater();
+            @Override
+            public void onClick(View v) {
 
-            View view =
-                    inflater.inflate(
-                            R.layout.custom_toast,
-                            null
-                    );
+                // Inflate custom Toast layout
+                LayoutInflater inflater =
+                        getLayoutInflater();
 
-            Toast toast = new Toast(
-                    getApplicationContext()
-            );
+                View view =
+                        inflater.inflate(
+                                R.layout.custom_toast,
+                                null
+                        );
 
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setView(view);
-            toast.show();
+                Toast toast =
+                        new Toast(
+                                getApplicationContext()
+                        );
+
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+            }
         });
     }
 }
