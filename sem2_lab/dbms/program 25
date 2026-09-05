@@ -1,0 +1,22 @@
+/*Create a database named "Company" in MongoDB and add a collection called "Employee" with the following fields: EmpId, EmpName, DOB, Salary and Designation.
+a)	Insert records into the collection.
+b)	Fetch all records from the collection.
+c)	List all the details of Employee in a neat format.
+d)	List the details of a specific employee.
+*/
+
+
+use company
+
+db.createCollection("employee")
+
+db.company.insertOne({empid:1,empname:"anu",DOB: new Date('2002-10-02'),salary:30000,desig:"hr"})
+db.company.insertOne({empid:2,empname:"banu",DOB: new Date('2003-08-12'),salary:35000,desig:"develper"}) 
+
+db.company.find()
+
+db.company.find().pretty()
+
+db.company.find({empname:"anu"})
+
+ 

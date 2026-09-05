@@ -1,0 +1,10 @@
+Create table Department (Department Id, Dept Name, Head of Department)
+Create table Employee (Employee Id, Name, Department Id, salary)
+a) Domain Constraints
+b) Entity Integrity Constraint
+c) Unique Key Constraints
+d) Referential Integrity Constraint
+
+query
+create table department(deptid number primary key,deptname varchar(25),hod varchar(25));
+ create table employee(empid number primary key,name varchar(25),deptid number references department(deptid),salary number check(salary>0));

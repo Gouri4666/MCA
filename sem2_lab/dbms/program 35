@@ -1,0 +1,46 @@
+Write a trigger that will prevent deleting a department from the department table if there are employees assigned to it.
+
+CREATE TABLE department (dept_id NUMBER,dept_name VARCHAR2(50));
+
+CREATE TABLE employee (empid NUMBER,empname VARCHAR2(50),dept_id NUMBER);
+
+INSERT INTO department VALUES (1,'HR');
+INSERT INTO department VALUES (2,'IT');
+
+INSERT INTO employee VALUES (101,'Manu',1);
+INSERT INTO employee VALUES (102,'Hari',1);
+
+COMMIT;
+
+CREATE OR REPLACE TRIGGER prevent_delete_dept
+BEFORE DELETE ON department
+FOR EACH ROW
+DECLARE
+    emp_count NUMBER;
+BEGIN
+    -- count employees in that department
+    SELECT COUNT(*) INTO emp_count
+    FROM employee
+    WHERE dept_id = :OLD.dept_id;
+
+    -- check condition
+    IF emp_count > 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20002,
+            'Cannot delete department: employees exist'
+        );
+    END IF;
+END;
+/
+
+DELETE FROM department WHERE dept_id = 1;
+
+ERROR at line 1:
+ORA-20002: Cannot delete department: employees exist
+ORA-06512: at "STUDENT.PREVENT_DELETE_DEPT", line 11
+ORA-04088: error during execution of trigger 'STUDENT.PREVENT_DELETE_DEPT'
+
+DELETE FROM department WHERE dept_id = 2;
+
+1 row deleted.
+

@@ -1,0 +1,15 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+create or replace procedure square(res in out number)
+	 is
+BEGIN
+	res:=res*res;
+END;
+/
+DECLARE
+	n number:=&number;
+BEGIN
+	square(n);
+	DBMS_OUTPUT.PUT_LINE('Square: ' || n);
+END;
+/

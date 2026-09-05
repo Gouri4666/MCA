@@ -1,0 +1,26 @@
+PROG 1: 
+Execute DDL statements
+
+a)	Create a table Student with fields (Roll No, Name, Course, Year)
+
+create table student(rollno int primary key,name varchar(25),course varchar(25),year int);
+insert into student values(11,'Gouri','MCA',2015);
+insert into student values(12,'Nandana','BCA',2015);
+
+
+b)	Alter table
+
+alter table student add (age int);
+alter table student rename column age to phoneno;
+alter table student modify phoneno varchar(25);
+
+
+c)	Truncate table
+
+truncate table student;
+
+
+d)	Drop table
+
+drop table student;
+

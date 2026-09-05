@@ -1,0 +1,20 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+create or replace function revstr(a in varchar)
+	return varchar is
+		rev varchar(25);
+BEGIN
+	for i in REVERSE 1..LENGTH(a) LOOP
+		rev:= rev || SUBSTR(a,i,1);
+	end LOOP;
+	return rev;
+END;
+/
+DECLARE
+	s varchar(25):='&string';
+	rev varchar(25):='';
+BEGIN
+	rev:=revstr(s);
+	DBMS_OUTPUT.PUT_LINE('reverse: ' || rev);
+END;
+/

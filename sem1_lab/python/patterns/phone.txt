@@ -1,0 +1,14 @@
+gouri
+age:16
+gouri@gmail.com
+phone number:9400944666
+vinu
+age:21
+vinu@gmail.com
+phone number:9207864842
+binu
+age:45
+binu@gmail.com
+phone number:9142227252
+6123456789
+6987654321

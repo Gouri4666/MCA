@@ -1,0 +1,9 @@
+#reverse a string
+def rev(s):
+    if s:
+        return s[-1]+rev(s[:-1])
+    else:
+        return ""
+
+s=input("Enter string: ")
+print("Reverse: ",rev(s))

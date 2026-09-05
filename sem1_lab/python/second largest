@@ -1,0 +1,6 @@
+n = int(input())
+arr = map(int, input().split())
+l=sorted(arr)
+largest=l[-1]
+slarge=max([x for x in l if x!=largest])
+print(slarge)

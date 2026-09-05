@@ -1,0 +1,20 @@
+Execute DML statements using SQL Join operations.
+Table categories (CategoryID, CategoryName, Description)
+Table Products (ProductID, ProductName, CategoryID, Price)
+a) Inner Join (Sort based on price)
+b) Left Join (Product Name=Laptop)
+c) Right Join (Category Name=Clothing)
+d) Full Join (Min Price)
+e) Natural Join (Max Price)
+
+Query
+create table categories(cid number primary key,cname varchar(25),description varchar(25));
+create table products(pid number,pname varchar(25),cid number references categories(cid),price number);
+select c.cname,p.pname,p.price from categories c inner join products p on c.cid=p.cid order by price;
+select c.cname,p.pname,p.price from categories c left join products p on c.cid=p.cid where p.pname='smartwatch';
+select c.cname,p.pname,p.price from categories c right join products p on c.cid=p.cid where c.cname='cosmetics';
+select c.cname,min(p.price) from categories c full join products p on c.cid=p.cid group by c.cname;
+select cname,min(price) from categories natural join products group by cname;
+
+
+natural join : no condition

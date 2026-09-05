@@ -1,0 +1,9 @@
+#sum of list using recursion
+def sum(l):
+    if not l:
+        return 0
+    else:
+        return l[0]+sum(l[1:]) 
+
+l=list(map(int,input("Enter list: ").split(" ")))
+print("Sum: ",sum(l))

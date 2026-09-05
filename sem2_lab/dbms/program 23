@@ -1,0 +1,21 @@
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+create or replace procedure minimum(a in number,b in number,res out number)
+	 is
+BEGIN
+	if a>b then
+		res:=b;
+	else
+		res:=a;
+	end if;
+END;
+/
+DECLARE
+	n1 number:=&number1;
+	n2 number:=&number2;
+	res number;
+BEGIN
+	minimum(n1,n2,res);
+	DBMS_OUTPUT.PUT_LINE('minimum: ' || res);
+END;
+/

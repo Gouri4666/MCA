@@ -1,0 +1,3 @@
+n=int(input("Enter a number:"))
+res=["even" if n%2==0 else "odd"]
+print(n," is ",res[0])
