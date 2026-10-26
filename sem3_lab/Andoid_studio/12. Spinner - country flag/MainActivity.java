@@ -1,62 +1,42 @@
-package com.example.practise;
+
+package com.example.practice;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Spinner spinner;
-    ImageView flag;
-
-    String[] countries = {"India", "USA", "UK", "Japan"};
-
-    int[] flags = {
-            R.drawable.india,
-            R.drawable.usa,
-            R.drawable.uk,
-            R.drawable.japan
-    };
+    Spinner sp;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinner = findViewById(R.id.spinnerCountry);
-        flag = findViewById(R.id.imgFlag);
+        sp=findViewById(R.id.sp);
+        img=findViewById(R.id.img);
 
+        String[] names={"India","Usa","Japan"};
+        int[] images={R.drawable.india,R.drawable.usa,R.drawable.japan};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                countries
-        );
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,names);
+        sp.setAdapter(adapter);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                img.setImageResource(images[position]);
+            }
 
-        adapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        spinner.setAdapter(adapter);
+            }
+        });
 
-        spinner.setOnItemSelectedListener(
-                new android.widget.AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(
-                            android.widget.AdapterView<?> parent,
-                            android.view.View view,
-                            int position,
-                            long id) {
-
-                        flag.setImageResource(flags[position]);
-                    }
-
-                    @Override
-                    public void onNothingSelected(
-                            android.widget.AdapterView<?> parent) {
-                    }
-                }
-        );
     }
 }
